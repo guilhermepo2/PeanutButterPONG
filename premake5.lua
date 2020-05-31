@@ -21,8 +21,8 @@ project "PeanutButter"
     cppdialect "C++17"
     staticruntime "on"
     
-    targetdir ("%{prj.name}/PeanutButter/bin/" .. outputdir .. "/%{prj.name}")
-	objdir ("%{prj.name}/PeanutButter/bin-int/" .. outputdir .. "/%{prj.name}")
+    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
 	pchheader "pbpch.h"
     pchsource "PeanutButter/PeanutButter/src/pbpch.h"
@@ -78,8 +78,8 @@ project "PBPong"
     language "C++"
     cppdialect "C++17"
 
-    targetdir ("%{prj.name}/bin/" .. outputdir .. "/%{prj.name}")
-    objdir ("%{prj.name}/bin-int/" .. outputdir .. "%{prj.name}")
+    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
     
     files
     {
