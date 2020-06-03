@@ -62,9 +62,9 @@ public:
 					OwnerTransform->Position->y + PeanutButter::Random::Float() 
 				};
 
-				MyParticle.Velocity = { 
-					BallVelocity.x + (PeanutButter::Random::Float() * 45.0f),
-					PeanutButter::Random::Float() * 45.0f 
+				MyParticle.Velocity = {
+					(BallVelocity.x / 5.0f) + (PeanutButter::Random::Float() * 10.0f),
+					PeanutButter::Random::Float() * 90.0f 
 				};
 				Application::s_ParticleSystem.Emit(MyParticle);
 			}
