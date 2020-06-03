@@ -25,11 +25,19 @@ public:
 
 	void Update(float DeltaTime) override {
 		if (PeanutButter::Input::IsKeyPressed(PB_KEYCODE_W)) {
-			OwnerTransform->Position->y -= Velocity * DeltaTime;
+			// TODO: Remove the 0 magic number from here, ideally we would check for collisions
+			if (OwnerTransform->Position->y - (Velocity * DeltaTime) >= 0) {
+				OwnerTransform->Position->y -= Velocity * DeltaTime;
+			}
 		}
-
+	
 		if (PeanutButter::Input::IsKeyPressed(PB_KEYCODE_S)) {
-			OwnerTransform->Position->y += Velocity * DeltaTime;
+			// TODO: Remove the (600 - 128) magic number from here, ideally we would check for collisions
+			// 600 = screen height
+			// 128 = paddle height
+			if (OwnerTransform->Position->y + (Velocity * DeltaTime) <= (600 - 128)) {
+				OwnerTransform->Position->y += Velocity * DeltaTime;
+			}
 		}
 	}
 

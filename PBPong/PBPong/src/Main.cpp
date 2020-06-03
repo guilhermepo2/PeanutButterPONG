@@ -27,6 +27,10 @@ public:
 		Application::s_AssetManager->AddTexture(std::string("pong-paddle-green"), std::string("assets/pong/fancy-paddle-green.png"));
 		Application::s_AssetManager->AddTexture(std::string("pong-paddle-blue"), std::string("assets/pong/fancy-paddle-blue.png"));
 
+		// Loading Fonts
+		Application::s_AssetManager->AddFont(std::string("arial-font"), std::string("assets/fonts/arial.ttf"), 14);
+		Application::s_AssetManager->AddFont(std::string("charriot-font"), std::string("assets/fonts/charriot.ttf"), 42);
+			
 		// Court Entity
 		Entity& CourtBackground(Application::s_EManager->AddEntity(std::string("court-background"), ELayerType::ELT_TilemapLayer));
 		CourtBackground.AddComponentOfType<Transform>(Vector2(0.0f, 0.0f), Vector2(0.0f, 0.0f), Vector2(1.0f, 1.0f));
@@ -46,6 +50,10 @@ public:
 		LeftPaddle.AddComponentOfType<Sprite>(std::string("pong-paddle-blue"), Vector2(32.0f, 128.0f));
 		LeftPaddle.AddComponentOfType<Collider2D>("left-paddle", Vector2(50.0f, (300.0f - 64.0f)), Vector2(32.0f, 128.0f));
 		LeftPaddle.AddComponentOfType<PaddleMovementComponent>(750.0f);
+
+		// Adding score points
+		Entity& ScoreLabel(Application::s_EManager->AddEntity(std::string("score"), ELayerType::ELT_UILayer));
+		ScoreLabel.AddComponentOfType<UIText>(Vector2(300, 25), std::string("Score: 0"), std::string("charriot-font"), PB_COLOR_WHITE);
 	}
 };
 
