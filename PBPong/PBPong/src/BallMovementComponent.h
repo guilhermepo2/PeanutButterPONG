@@ -5,8 +5,10 @@ using namespace PeanutButter;
 class BallMovementComponent : public PeanutButter::Component {
 public:
 	Vector2 BallVelocity;
-	BallMovementComponent() : BallVelocity(100.0f, 100.0f) {}
-	BallMovementComponent(const Vector2& InBallVelocity) : BallVelocity(InBallVelocity) {}
+	BallMovementComponent() : BallVelocity(100.0f, 100.0f), TimesHitLeft(0), TimesHitRight(0) {}
+	BallMovementComponent(const Vector2& InBallVelocity) : BallVelocity(InBallVelocity), TimesHitLeft(0), TimesHitRight(0) {}
+	int TimesHitLeft;
+	int TimesHitRight;
 
 private:
 	Transform* OwnerTransform;
@@ -41,7 +43,16 @@ public:
 		// TODO: Remove magic numbers from here
 		if ((OwnerTransform->Position->x <= 0 && BallVelocity.x < 0) ||
 			(OwnerTransform->Position->x >= (800 - 16) && BallVelocity.x > 0)) {
+			
+			// Incrementing punctuation
+			if (BallVelocity.x > 0) { // Hit the right side
+				TimesHitRight++;
+			} else {			      // Hit the left side
+				TimesHitLeft++;
+			}
+			
 			BallVelocity.x *= -1.0f;
+
 		}
 		else if ((OwnerTransform->Position->y <= 0 && BallVelocity.y < 0) ||
 			(OwnerTransform->Position->y >= (600 - 16) && BallVelocity.y > 0)) {

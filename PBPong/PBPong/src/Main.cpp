@@ -1,6 +1,7 @@
 #include <PeanutButter.h>
 #include "PaddleMovementComponent.h"
 #include "BallMovementComponent.h"
+#include "PunctuationTracker.h"
 
 class Pong : public PeanutButter::Application {
 public:
@@ -29,7 +30,7 @@ public:
 
 		// Loading Fonts
 		Application::s_AssetManager->AddFont(std::string("arial-font"), std::string("assets/fonts/arial.ttf"), 14);
-		Application::s_AssetManager->AddFont(std::string("charriot-font"), std::string("assets/fonts/charriot.ttf"), 42);
+		Application::s_AssetManager->AddFont(std::string("charriot-font"), std::string("assets/fonts/charriot.ttf"), 28);
 			
 		// Court Entity
 		Entity& CourtBackground(Application::s_EManager->AddEntity(std::string("court-background"), ELayerType::ELT_TilemapLayer));
@@ -59,8 +60,15 @@ public:
 		RightPaddle.AddComponentOfType<PaddleMovementComponent>(750.0f, PB_KEYCODE_I, PB_KEYCODE_K);
 
 		// Adding score points
-		Entity& ScoreLabel(Application::s_EManager->AddEntity(std::string("score"), ELayerType::ELT_UILayer));
-		ScoreLabel.AddComponentOfType<UIText>(Vector2(300, 25), std::string("Score: 0"), std::string("charriot-font"), PB_COLOR_WHITE);
+		Entity& LeftScoreLabel(Application::s_EManager->AddEntity(std::string("left-score"), ELayerType::ELT_UILayer));
+		LeftScoreLabel.AddComponentOfType<UIText>(Vector2(100, 25), std::string("Score: 0"), std::string("charriot-font"), PB_COLOR_WHITE);
+
+		Entity& RightScoreLabel(Application::s_EManager->AddEntity(std::string("right-score"), ELayerType::ELT_UILayer));
+		RightScoreLabel.AddComponentOfType<UIText>(Vector2(600, 25), std::string("Score: 0"), std::string("charriot-font"), PB_COLOR_WHITE);
+
+		// Punctuation Manager
+		Entity& PunctuationManager(Application::s_EManager->AddEntity(std::string("punctuation-manager"), ELayerType::ELT_UILayer));
+		PunctuationManager.AddComponentOfType<PunctuationTracker>(LeftScoreLabel.GetComponentOfType<UIText>(), RightScoreLabel.GetComponentOfType<UIText>(), BallEntity.GetComponentOfType<BallMovementComponent>());
 	}
 };
 
