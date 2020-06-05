@@ -28,7 +28,9 @@ public:
 		if (owner->HasComponentOfType<Collider2D>()) {
 			// Bind Process Collision on Collider 2D
 			Collider2D* ColliderComponent = owner->GetComponentOfType<Collider2D>();
-			ColliderComponent->HandleCollision = std::bind(&BallMovementComponent::ProcessCollision, this, std::placeholders::_1);
+
+			// ColliderComponent->HandleCollision = std::bind(&BallMovementComponent::ProcessCollision, this, std::placeholders::_1);
+			ColliderComponent->HandleCollision = PB_BIND_COLLISION(&BallMovementComponent::ProcessCollision);
 		}
 	}
 
@@ -52,7 +54,7 @@ public:
 
 	void ProcessCollision(PeanutButter::Collider2D* Other) {
 		// PB_WARNING("BALL HANDLING COLLISION!");
-		if (Other->ColliderTag.compare("left-paddle") == 0 && BallVelocity.x < 0) {
+		if (Other->ColliderTag.compare("paddle") == 0 && BallVelocity.x < 0) {
 			BallVelocity.x *= -1;
 
 			// Instantiating Particles
@@ -66,6 +68,7 @@ public:
 					(BallVelocity.x / 5.0f) + (PeanutButter::Random::Float() * 10.0f),
 					PeanutButter::Random::Float() * 90.0f 
 				};
+
 				Application::s_ParticleSystem.Emit(MyParticle);
 			}
 		}

@@ -48,7 +48,7 @@ public:
 		Entity& LeftPaddle(Application::s_EManager->AddEntity(std::string("left-paddle"), ELayerType::ELT_PlayerLayer));
 		LeftPaddle.AddComponentOfType<Transform>(Vector2(50.0f, (300.0f - 64.0f)), Vector2(0.0f, 0.0f), Vector2(1.0f, 1.0f));
 		LeftPaddle.AddComponentOfType<Sprite>(std::string("pong-paddle-blue"), Vector2(32.0f, 128.0f));
-		LeftPaddle.AddComponentOfType<Collider2D>("left-paddle", Vector2(50.0f, (300.0f - 64.0f)), Vector2(32.0f, 128.0f));
+		LeftPaddle.AddComponentOfType<Collider2D>("paddle", Vector2(50.0f, (300.0f - 64.0f)), Vector2(32.0f, 128.0f));
 		LeftPaddle.AddComponentOfType<PaddleMovementComponent>(750.0f);
 
 		// Adding score points
