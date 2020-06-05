@@ -54,7 +54,9 @@ public:
 
 	void ProcessCollision(PeanutButter::Collider2D* Other) {
 		// PB_WARNING("BALL HANDLING COLLISION!");
-		if (Other->ColliderTag.compare("paddle") == 0 && BallVelocity.x < 0) {
+		if ( (Other->ColliderTag.compare("left-paddle") == 0 && BallVelocity.x < 0) ||
+			 (Other->ColliderTag.compare("right-paddle") == 0 && BallVelocity.x > 0)
+			) {
 			BallVelocity.x *= -1;
 
 			// Instantiating Particles
